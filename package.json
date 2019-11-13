@@ -1,0 +1,37 @@
+{
+  "name": "expmsngr",
+  "version": "1.0.0",
+  "description": "node express messenger rest services for loya",
+  "main": "server.js",
+  "scripts": {
+    "start:dev": "nodemon server.js",
+    "start:prod": "SETNODE_ENV=production& nodemon server.js"
+  },
+  "keywords": [
+    "loya",
+    "messenger",
+    "node",
+    "express"
+  ],
+  "author": "gudun.ku@gmail.com",
+  "license": "MIT",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-prettier": "^6.5.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-prettier": "^3.1.1",
+    "eslint-plugin-react": "^7.16.0",
+    "nodemon": "^1.19.4",
+    "prettier": "^1.19.0"
+  },
+  "dependencies": {
+    "assert": "^2.0.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "morgan": "^1.9.1",
+    "tingodb": "^0.6.1"
+  }
+}
