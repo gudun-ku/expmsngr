@@ -50,18 +50,18 @@ exports.signup = catchAsync(async (req, res, next) => {
 
 // login existing users
 exports.login = catchAsync(async (req, res, next) => {
-  const { email, password } = req.body;
+  const { login, password } = req.body;
 
   // 1) check if email and password are exist
-  if (!email || !password) {
-    return next(new AppError('Please provide email and password', 400));
+  if (!login || !password) {
+    return next(new AppError('Please provide login and password', 400));
   }
 
   // 2) check if email and password are correct
-  const user = await User.findOne({ email }).select('+password');
-
+  const user = await User.findOne({ login }).select('+password');
+  console.log(user);
   if (!user || !(await user.correctPassword(password, user.password))) {
-    return next(new AppError('Incorrect email or password', 401));
+    return next(new AppError('Incorrect login or password', 401));
   }
 
   // 3) if everything is correct, send JWT to the client

@@ -14,6 +14,14 @@ const userSchema = new mongoose.Schema({
     minlength: [5, 'A user name must have greater than 5 characters']
     //validate: [validator.isAlpha, 'The tour name must only contain letters']
   },
+  login: {
+    type: String,
+    required: [true, 'Please provide your login'],
+    unique: true,
+    lowercase: true,
+    minlength: [5, 'A user login must have greater than 5 characters'],
+    maxlength: [50, 'A user login must have less or equal than 50 characters']
+  },
   email: {
     type: String,
     required: [true, 'Please provide your email'],
@@ -21,6 +29,20 @@ const userSchema = new mongoose.Schema({
     lowercase: true,
     validate: [validator.isEmail]
   },
+  registrationDate: {
+    type: Date,
+    default: Date.now()
+  },
+  state: {
+    type: String,
+    required: [true, 'A user profile must have a status'],
+    enum: {
+      values: ['active', 'suspended'],
+      message: 'Status is either: active or suspended'
+    },
+    default: 'active'
+  },
+  // restricted
   role: {
     type: String,
     enum: ['user', 'guide', 'lead-guide', 'admin'],
