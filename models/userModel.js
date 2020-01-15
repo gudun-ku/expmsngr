@@ -42,6 +42,19 @@ const userSchema = new mongoose.Schema({
     },
     default: 'active'
   },
+
+  profile: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'Profile'
+  },
+  smsProfile: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'SMSProfile'
+  },
+  emailProfile: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'EmailProfile'
+  },
   // restricted
   role: {
     type: String,
@@ -103,6 +116,17 @@ userSchema.pre('save', function(next) {
 userSchema.pre(/^find/, function(next) {
   // this points to the current query
   this.find({ active: { $ne: false } });
+  next();
+});
+
+userSchema.pre(/^find/, function(next) {
+  this.populate({
+    path: 'profile',
+    select: 'organization'
+  })
+    .populate({ path: 'smsProfile', select: '-__v' })
+    .populate({ path: 'emailProfile', select: '-__v' });
+
   next();
 });
 
